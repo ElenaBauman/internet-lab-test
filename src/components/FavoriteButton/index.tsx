@@ -1,22 +1,21 @@
-import { Pressable, StyleSheet, Text } from 'react-native';
-import {ADD_FROM_FAVORITE, FAVORITE, REMOVE_FROM_FAVORITE, UNFAVORABLE} from "@/constants/properties";
-import {styles} from "@/components/FavoriteButton/styles";
+import { Pressable, Text } from 'react-native';
+import { ADD_FROM_FAVORITE, FAVORITE, REMOVE_FROM_FAVORITE, UNFAVORABLE } from "@/constants/properties";
+import { styles } from "@/components/FavoriteButton/styles";
 
 type Props = {
   active: boolean;
   onPress: () => void;
 };
 
-// Звёздочка «в избранное».
 export function FavoriteButton({ active, onPress }: Props) {
   return (
     <Pressable
-      onPress={onPress}
-      hitSlop={12}
+      onPress={ onPress }
+      hitSlop={ 12 }
       accessibilityRole="button"
-      accessibilityLabel={active ? REMOVE_FROM_FAVORITE : ADD_FROM_FAVORITE}
+      accessibilityLabel={ active ? REMOVE_FROM_FAVORITE : ADD_FROM_FAVORITE }
     >
-      <Text style={[styles.star, active && styles.active]}>{active ? FAVORITE : UNFAVORABLE}</Text>
+      <Text style={[styles.star, active && styles.active]}>{ active ? FAVORITE : UNFAVORABLE }</Text>
     </Pressable>
   );
 }

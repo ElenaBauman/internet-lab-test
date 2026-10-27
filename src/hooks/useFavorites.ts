@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const STORAGE_KEY = 'favorites';
+import { STORAGE_FAVORITE_KEY } from "@/constants/storage";
 
 export const useFavorites = () => {
   const [favorites, setFavorites] = useState<string[]>([]);
 
   useEffect(() => {
-    AsyncStorage.getItem(STORAGE_KEY).then((data) => {
-      if (data) setFavorites(JSON.parse(data));
+    AsyncStorage.getItem(STORAGE_FAVORITE_KEY).then((data) => {
+      if (!data) {
+        return;
+      }
+
+      setFavorites(JSON.parse(data));
     });
   }, []);
 
@@ -19,7 +22,9 @@ export const useFavorites = () => {
       const next = prev.includes(id)
           ? prev.filter((favoriteId) => favoriteId !== id)
           : [...prev, id];
-      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+
+      AsyncStorage.setItem(STORAGE_FAVORITE_KEY, JSON.stringify(next));
+
       return next;
     });
   };

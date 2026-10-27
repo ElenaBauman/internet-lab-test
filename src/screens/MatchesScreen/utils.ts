@@ -1,7 +1,7 @@
-import {Filter, MatchesResponse, MatchStatus} from "@/types";
+import { Filter, MatchesResponse, MatchStatus } from "@/types";
 import dayjs from "dayjs";
-import {DATETIME_FORMAT} from "@/constants/datetime";
-import {DATE_IS_UNKNOWN} from "@/constants/properties";
+import { DATETIME_FORMAT } from "@/constants/datetime";
+import { DATE_IS_UNKNOWN } from "@/constants/properties";
 
 export const formatDate = (iso: string | null): string => {
     if (!iso) {

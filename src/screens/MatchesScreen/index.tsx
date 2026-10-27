@@ -1,20 +1,20 @@
-import {useCallback, useEffect, useMemo, useState} from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
     Text,
     View,
 } from 'react-native';
-import {MATCHES_URL} from '@/config';
-import {Filter, Match} from '@/types';
-import {isMatchesResponse, filterByStatus} from "./utils";
-import {styles} from "./styles";
+import { MATCHES_URL } from '@/config';
+import { Filter, Match} from '@/types';
+import { isMatchesResponse, filterByStatus } from "./utils";
+import { styles } from "./styles";
 import ErrorContent from "./components/ErrorContent";
 import Loader from "./components/Loader";
 import Filters from "./components/Filters";
 import Matches from "./components/Matches";
 import Header from "./components/Header";
-import {RESPONSE_ERROR, FETCH_ERROR, NO_MATCHES} from "@/constants/properties";
+import { RESPONSE_ERROR, FETCH_ERROR, NO_MATCHES, TITLE } from "@/constants/properties";
 import dayjs from "dayjs";
-import {useFavorites} from "@/hooks/useFavorites";
+import { useFavorites } from "@/hooks/useFavorites";
 
 const MatchesScreen = () => {
     const [matches, setMatches] = useState<Match[]>([]);
@@ -23,7 +23,7 @@ const MatchesScreen = () => {
     const [filter, setFilter] = useState(Filter.All);
     const [updatedAt, setUpdatedAt] = useState(() => dayjs());
     const { isFavorite, toggle } = useFavorites();
-    const {container, title, center, hint} = styles;
+    const { container, title, center, hint } = styles;
 
     const load = useCallback(async () => {
         setIsLoading(true);
@@ -51,7 +51,6 @@ const MatchesScreen = () => {
         }
     }, []);
 
-
     const handleFilter = (filter: Filter) => {
         setFilter(filter)
     }
@@ -61,7 +60,7 @@ const MatchesScreen = () => {
     }
 
     const filteredMatches = useMemo(
-        () => matches.filter(({status}) => filterByStatus(status, filter)),
+        () => matches.filter(({ status }) => filterByStatus(status, filter)),
         [matches, filter],
     );
 
@@ -77,26 +76,26 @@ const MatchesScreen = () => {
 
     if (error) {
         return (
-            <ErrorContent load={load} errorText={error}/>
+            <ErrorContent load={ load } errorText={ error }/>
         );
     }
 
     return (
-        <View style={container}>
-            <Text style={title}>Матчи тура</Text>
-            <Filters filter={filter} handleClick={handleFilter}/>
-            <Header updatedAt={updatedAt} handleRefresh={handleRefresh}/>
+        <View style={ container }>
+            <Text style={ title }>{ TITLE }</Text>
+            <Filters filter={ filter } handleClick={ handleFilter }/>
+            <Header updatedAt={ updatedAt } handleRefresh={ handleRefresh }/>
             {!!filteredMatches.length ? (
                 <Matches
-                    matches={filteredMatches}
-                    handleRefresh={handleRefresh}
-                    isLoading={isLoading}
-                    isFavorite={isFavorite}
-                    toggle={toggle}
+                    matches={ filteredMatches }
+                    handleRefresh={ handleRefresh }
+                    isLoading={ isLoading }
+                    isFavorite={ isFavorite }
+                    toggle={ toggle }
                 />
             ) : (
-                <View style={center}>
-                    <Text style={hint}>{NO_MATCHES}</Text>
+                <View style={ center }>
+                    <Text style={ hint }>{ NO_MATCHES }</Text>
                 </View>
             )}
         </View>

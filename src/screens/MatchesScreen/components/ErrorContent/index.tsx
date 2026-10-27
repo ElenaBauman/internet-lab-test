@@ -1,7 +1,7 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import { Pressable, Text, View } from "react-native";
 import { styles } from "./styles";
-import {ERROR, RETRY} from "@/constants/properties";
+import { ERROR, RETRY } from "@/constants/properties";
 
 type PropsT = {
     errorText: string,
@@ -13,9 +13,9 @@ const ErrorContent:FC<PropsT> = ({ errorText, load }) => {
 
     return (
         <View style={ center }>
-            <Text style={ error }>{ERROR} {errorText}</Text>
-            <Pressable style={ retry } onPress={() => load()}>
-                <Text style={ retryText }>{RETRY}</Text>
+            <Text style={ error }>{ ERROR } { errorText }</Text>
+            <Pressable style={ retry } onPress={ () => load() }>
+                <Text style={ retryText }>{ RETRY }</Text>
             </Pressable>
         </View>
     );

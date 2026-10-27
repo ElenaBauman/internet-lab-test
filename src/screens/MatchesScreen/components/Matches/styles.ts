@@ -1,5 +1,8 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    container: { paddingBottom: 24, gap: 12 },
+    container: {
+        paddingBottom: 24,
+        gap: 12
+    },
 });

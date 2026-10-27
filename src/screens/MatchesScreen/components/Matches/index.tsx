@@ -1,8 +1,8 @@
-import {FlatList, RefreshControl} from "react-native";
-import {Match as MatchT} from "@/types";
+import { FlatList, RefreshControl } from "react-native";
+import { Match as MatchT } from "@/types";
 import Match from "./Match";
 import { FC } from "react";
-import {styles} from "./styles";
+import { styles } from "./styles";
 
 type PropsT = {
     matches: MatchT[];
@@ -17,14 +17,14 @@ const Matches:FC<PropsT> = (props) => {
 
     return (
         <FlatList
-            data={matches}
+            data={ matches }
             keyExtractor={({ id }) => id}
             contentContainerStyle={ styles.container }
             refreshControl={
                 <RefreshControl refreshing={ isLoading } onRefresh={ handleRefresh } />
             }
             renderItem={({ item }) => (
-                <Match match={ item } isFavorite={isFavorite} toggle={toggle}/>
+                <Match match={ item } isFavorite={ isFavorite } toggle={ toggle }/>
             )}
         />
     );
