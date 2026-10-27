@@ -1,16 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// Избранные матчи (по id). Хранятся только в памяти, пока открыто приложение.
+const STORAGE_KEY = 'favorites';
+
 export const useFavorites = () => {
   const [favorites, setFavorites] = useState<string[]>([]);
+
+  useEffect(() => {
+    AsyncStorage.getItem(STORAGE_KEY).then((data) => {
+      if (data) setFavorites(JSON.parse(data));
+    });
+  }, []);
 
   const isFavorite = (id: string) => favorites.includes(id);
 
   const toggle = (id: string) => {
-    setFavorites((prev) =>
-        prev.includes(id) ? prev.filter((favoriteId) => favoriteId !== id) : [...prev, id]
-    );
+    setFavorites((prev) => {
+      const next = prev.includes(id)
+          ? prev.filter((favoriteId) => favoriteId !== id)
+          : [...prev, id];
+      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      return next;
+    });
   };
 
   return { isFavorite, toggle };
-}
+};
