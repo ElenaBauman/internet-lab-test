@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
+import {Dayjs} from "dayjs";
 
 type Props = {
   // Момент последней успешной загрузки данных.
-  since: Date;
+  since: Dayjs;
 };
 
 // Подпись «Обновлено N сек назад».

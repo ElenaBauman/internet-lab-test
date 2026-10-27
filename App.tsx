@@ -1,9 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
-import { MatchesScreen } from './src/screens/MatchesScreen';
+import dayjs from "dayjs";
+import MatchesScreen from "@/screens/MatchesScreen";
 
 export default function App() {
-  return (
+    dayjs.locale('ru');
+
+    return (
     <View style={styles.root}>
       <MatchesScreen />
       <StatusBar style="auto" />
